@@ -8,7 +8,7 @@ import { Link } from "gatsby";
 const IndexPage = ({ data }) => (
   <div>
     <h1>Blog Home Page</h1>
-    <Link to="/404">Go to page 2</Link>
+    <Link to="/page2">Go to page 2</Link>
 
     <h2>Index</h2>
     <ul>
