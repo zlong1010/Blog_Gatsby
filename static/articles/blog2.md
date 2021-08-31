@@ -1,8 +1,5 @@
 ---
-title: 'Blog-2'
 draft: false
-date: "2020-4-8"
-name: 'xxx'
 ---
 
 ### 第二篇博客

@@ -29,13 +29,9 @@ exports.createPages = ({ actions, graphql }) => {
     {
       allMarkdownRemark {
         nodes {
-          frontmatter {
-            title
-          }
           fields {
             slug
           }
-          html
         }
       }
     }

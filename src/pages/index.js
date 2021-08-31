@@ -17,7 +17,6 @@ const HomePage = ({ data }) => (
         <li key={node.id}>
           <Link to={node.fields.slug}>
             {node.fields.slug}
-            {/* node.frontmatter.title */}
           </Link>
         </li>
       ))}
@@ -33,12 +32,8 @@ export const pageQuery = graphql`
     allMarkdownRemark(
       limit: 10
       filter: { frontmatter: { draft: { eq: false } } }
-      sort: { fields: frontmatter___date, order: DESC }
     ) {
       nodes {
-        frontmatter {
-          title
-        }
         fields {
           slug
         }

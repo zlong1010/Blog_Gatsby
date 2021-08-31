@@ -1,5 +1,4 @@
 ---
-title: 'Linux命令'
 draft: false
 ---
 
