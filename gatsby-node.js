@@ -1,5 +1,6 @@
 /*
  * 我们用GraphQL取得所有的文章，用foreach针对每一篇文章使用createPage建立新页面，这里则需要用到path和postTemplate
+ * Each export found in this file will be parsed by Gatsby
  */
 const path = require("path");
 const { createFilePath } = require(`gatsby-source-filesystem`);
@@ -45,6 +46,7 @@ exports.createPages = ({ actions, graphql }) => {
       createPage({
         path: node.fields.slug,
         component: postTemplate,
+        context: { slug: node.fields.slug }, // context 会传递给组件的 props.pageContext 用于 query variables
       });
     });
   });

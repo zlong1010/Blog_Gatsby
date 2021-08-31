@@ -4,6 +4,7 @@ draft: false
 date: "2020-4-7"
 ---
 
+[//]: # (frontmatter: 文章额外的metadata， 不会渲染在页面上)
 [//]: # (上面的path并非真实的文件路径，用于'<Link to="/page2">Go to page 2</Link>'，与to的参数值对应)
 
 # Post Heading

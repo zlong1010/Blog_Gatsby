@@ -2,42 +2,34 @@
  * MD文件模板
  */
 import React from "react";
-import { Link } from "gatsby";
+import { Link, graphql } from "gatsby";
 import Header from "../components/Header";
 import Catalog from "../components/Catalog";
 import "../global.css";
 // import Helmet from "react-helmet";
 
-/* export const postQuery = graphql`
-  query BlogPostByPath($path: String!) {
-    markdownRemark(frontmatter: { path: { eq: $path } }) {
-      html
-      frontmatter {
-        path
-        title
-      }
-    }
-  }
-`; */
+// In Gatsby, query variables can only be used inside of page queries. (You can’t use them with the useStaticQuery hook.)
 export const postQuery = graphql`
-  query BlogPostByPath {
-    allMarkdownRemark {
-      nodes {
-        fields {
-          slug
-        }
-      }
+query BlogPostByPath($slug: String) {
+  markdownRemark(fields: {slug: {eq: $slug}}) {
+    frontmatter {
+      title
     }
-    markdownRemark(frontmatter: { draft: { eq: false } }) {
-      frontmatter {
-        title
+    fields {
+      slug
+    }
+    html
+    id
+    parent {
+      ... on File {
+        name
+        base
+        mtime
+        sourceInstanceName
       }
-      fields {
-        slug
-      }
-      html
     }
   }
+}
 `;
 
 const styCatalog = {
@@ -49,14 +41,7 @@ const styArticle = {
 };
 
 function Template({ data }) {
-  const { allMarkdownRemark:articleNodes, markdownRemark: post } = data;
-  let articles = articleNodes.nodes;
-  let filePath=[];
-  articles.map(item => {
-    filePath = item.fields.slug.split('/');
-    console.log(filePath);
-  });
-
+  const { markdownRemark: post } = data;
   return (
     <div>
       <Header />
