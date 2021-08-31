@@ -7,7 +7,7 @@ html,body {
   width: 100%;
 }
 
-body,main,div{
+body,main{
   border: 1px blue solid;
 }
 

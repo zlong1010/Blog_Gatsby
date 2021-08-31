@@ -10,9 +10,9 @@ const HomePage = ({ data }) => (
   <div>
     <Header />
     <main><br/>首<br/>页<br/>内<br/>容...</main>
-    <Link to="/page2">Go to page 2</Link>
+    <Link to="/other">Go to other</Link>
     <h2>Index</h2>
-    <ul>
+    <ul className='link-wrap'>
       {data.allMarkdownRemark.nodes.map(node => (
         <li key={node.id}>
           <Link to={node.fields.slug}>
