@@ -9,12 +9,12 @@ import "../global.css";
 // import Helmet from "react-helmet";
 
 // In Gatsby, query variables can only be used inside of page queries. (You can’t use them with the useStaticQuery hook.)
-// $slug 的值来源于 createPage 中的 context
+// $articlePath 的值来源于 createPage 中的 context
 export const postQuery = graphql`
-query BlogPostByPath($slug: String) {
-  markdownRemark(fields: {slug: {eq: $slug}}) {
+query BlogPostByPath($articlePath: String) {
+  markdownRemark(fields: {articlePath: {eq: $articlePath}}) {
     fields {
-      slug
+      articlePath
     }
     html
     id

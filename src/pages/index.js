@@ -4,25 +4,28 @@
 import React from "react";
 import { Link } from "gatsby";
 import Header from "../components/Header";
-// import Layout from "../components/layout";
+import { DateUtil } from '../util';
 
-const HomePage = ({ data }) => (
-  <div>
+const HomePage = ({ data }) => {
+  let articles = data.allMarkdownRemark.nodes;
+  articles = articles.sort((a, b) => DateUtil.sort(a.parent.mtime, b.parent.mtime, 'desc'));
+  return <div>
     <Header />
     <main><br/>首<br/>页<br/>内<br/>容...</main>
     <Link to="/other">Go to other</Link>
     <h2>Index</h2>
     <ul className='link-wrap'>
-      {data.allMarkdownRemark.nodes.map(node => (
+      {articles.map(node => (
         <li key={node.id}>
-          <Link to={node.fields.slug}>
-            {node.fields.slug}
+          <Link to={node.fields.articlePath}>
+            {node.parent.name}
           </Link>
+          <span>{ DateUtil.dataToLocaleString(node.parent.mtime)}</span>
         </li>
       ))}
     </ul>
   </div>
-);
+};
 
 /**
  * 使用graphql读取目录下的文件,传递给HomePage的data参数
@@ -30,14 +33,20 @@ const HomePage = ({ data }) => (
 export const pageQuery = graphql`
   query IndexQuery {
     allMarkdownRemark(
-      limit: 10
+      limit: 100
       filter: { frontmatter: { draft: { eq: false } } }
     ) {
       nodes {
-        fields {
-          slug
-        }
         id
+        fields {
+          articlePath
+        }
+        parent {
+          ... on File {
+            name
+            mtime(formatString: "YYYY/MM/DD hh:mm")
+          }
+        }
       }
     }
   }

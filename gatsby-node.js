@@ -11,13 +11,13 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 
   /* const fileNode = getNode(node.parent);
   console.log(`\nrelativePath:`, fileNode.relativePath); */
-  const slug = createFilePath({ node, getNode }); // basePath: 'pages'
+  const articlePath = createFilePath({ node, getNode }); // basePath: 'pages'
   // static
-  console.log('\n自定义数据:', slug);
+  console.log('\n自定义数据:', articlePath);
   actions.createNodeField({
     node,
-    name: 'slug',
-    value: slug,
+    name: 'articlePath',
+    value: articlePath,
   });
 
 };
@@ -30,7 +30,7 @@ exports.createPages = ({ actions, graphql }) => {
       allMarkdownRemark {
         nodes {
           fields {
-            slug
+            articlePath
           }
         }
       }
@@ -41,9 +41,9 @@ exports.createPages = ({ actions, graphql }) => {
     }
     res.data.allMarkdownRemark.nodes.forEach(node => {
       createPage({
-        path: node.fields.slug,
+        path: node.fields.articlePath,
         component: postTemplate,
-        context: { slug: node.fields.slug }, // context 会传递给组件的 props.pageContext 用于 query variables
+        context: { articlePath: node.fields.articlePath }, // context 会传递给组件的 props.pageContext 用于 query variables
       });
     });
   });
