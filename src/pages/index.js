@@ -16,7 +16,8 @@ const HomePage = ({ data }) => (
       {data.allMarkdownRemark.nodes.map(node => (
         <li key={node.id}>
           <Link to={node.fields.slug}>
-            {node.frontmatter.title}
+            {node.fields.slug}
+            {/* node.frontmatter.title */}
           </Link>
         </li>
       ))}
