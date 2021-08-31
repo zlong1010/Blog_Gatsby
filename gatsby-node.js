@@ -6,24 +6,25 @@ const path = require("path");
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
 // 向数据源结点中添加自定义数据, 作为URL中的路径, 注意 basePath: 'pages'
-exports.onCreateNode = ({ node,getNode,actions }) => {
+exports.onCreateNode = ({ node, getNode, actions }) => {
   if (node.internal.type !== `MarkdownRemark`) return;
 
   /* const fileNode = getNode(node.parent);
   console.log(`\nrelativePath:`, fileNode.relativePath); */
-  const slug = createFilePath({ node, getNode, basePath: `pages` });
+  const slug = createFilePath({ node, getNode }); // basePath: 'pages'
+  // static
   console.log('\n自定义数据:', slug);
   actions.createNodeField({
     node,
     name: 'slug',
-    value: slug
+    value: slug,
   });
 
 };
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
-  const postTemplate = path.resolve("src/templates/post.js");
+  const postTemplate = path.resolve('src/templates/post.js');
   return graphql(`
     {
       allMarkdownRemark {
