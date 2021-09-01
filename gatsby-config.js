@@ -19,5 +19,16 @@ module.exports = {
         path: `${__dirname}/static`,
       },
     },
+    'gatsby-plugin-less',
+    {
+      resolve: `gatsby-plugin-alias-imports`,
+      options: {
+        alias: {
+          "@": "src",
+          "@style": "src/style"
+        },
+        extensions: ["js"]
+      }
+    },
   ],
 }

@@ -4,12 +4,13 @@
 import React from "react";
 import { Link } from "gatsby";
 import Header from "../components/Header";
-import { DateUtil } from '../util';
+import { DateUtil } from '@/util';
+import '@style/global.css';
 
 const HomePage = ({ data }) => {
   let articles = data.allMarkdownRemark.nodes;
   articles = articles.sort((a, b) => DateUtil.sort(a.parent.mtime, b.parent.mtime, 'desc'));
-  return <div>
+  return <div className='page page-home-wrap'>
     <Header />
     <main><br/>首<br/>页<br/>内<br/>容...</main>
     <Link to="/other">Go to other</Link>
