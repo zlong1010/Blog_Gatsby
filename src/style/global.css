@@ -1,9 +1,0 @@
-@import "./reset.css";
-.page {
-  max-width: 80%;
-  margin: 0 auto;
-  outline: 1px solid red;
-  font-family: 'Courier New Regular', Courier, monospace;
-  font-size: 14px;
-  line-height: 23px;
-}

@@ -1,13 +1,10 @@
 import React from 'react';
 import { Link } from "gatsby";
-
-const sty={
-  borderBottom: '1px solid #eaecef'
-};
+import './index.less';
 
 function Header(props){
   return(
-    <header style={sty}>
+    <header className="g-header">
       <Link to="/">首页</Link>
       <span>博客</span>
       <span>Github</span>

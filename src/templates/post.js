@@ -1,11 +1,9 @@
-/**
- * MD文件模板
- */
+// MD文件模板
 import React from 'react';
 import { Link, graphql } from 'gatsby';
-import Header from '../components/Header';
-import Catalog from '../components/Catalog';
-import '../style/global.css';
+import Header from '../components/header';
+import Catalog from '../components/catalog';
+import '@style/global.less';
 // import Helmet from "react-helmet";
 
 // In Gatsby, query variables can only be used inside of page queries. (You can’t use them with the useStaticQuery hook.)
@@ -30,23 +28,14 @@ export const postQuery = graphql`
   }
 `;
 
-const styCatalog = {
-  border: 'solid 1px blue',
-  position: 'fixed',
-};
-const styArticle = {
-  paddingLeft: '10rem',
-};
-
 function Template({ data }) {
   const { markdownRemark: post } = data;
   return (
     <div className="page page-article-template">
       <Header />
-      <Catalog sty={styCatalog} />
+      <Catalog />
       <article
         className="border"
-        style={styArticle}
         dangerouslySetInnerHTML={{ __html: post.html }}
       ></article>
       <Link to="/">Home</Link>

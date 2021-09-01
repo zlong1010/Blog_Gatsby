@@ -1,11 +1,9 @@
-/**
- * 博客首页
- */
+// 主页
 import React from "react";
 import { Link } from "gatsby";
-import Header from "../components/Header";
+import Header from "../components/header";
 import { DateUtil } from '@/util';
-import '@style/global.css';
+import '@style/global.less';
 
 const HomePage = ({ data }) => {
   let articles = data.allMarkdownRemark.nodes;
@@ -14,14 +12,14 @@ const HomePage = ({ data }) => {
     <Header />
     <main><br/>首<br/>页<br/>内<br/>容...</main>
     <Link to="/other">Go to other</Link>
-    <h2>Index</h2>
+    <h2>文章列表</h2>
     <ul className='link-wrap'>
       {articles.map(node => (
         <li key={node.id}>
           <Link to={node.fields.articlePath}>
             {node.parent.name}
           </Link>
-          <span>{ DateUtil.dataToLocaleString(node.parent.mtime)}</span>
+          <span className="g-desc" style={{marginLeft: '8px'}}>{ DateUtil.dataToLocaleString(node.parent.mtime)}</span>
         </li>
       ))}
     </ul>
