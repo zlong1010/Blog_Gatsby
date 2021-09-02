@@ -1,8 +1,7 @@
 // MD文件模板
 import React from 'react';
 import { Link, graphql } from 'gatsby';
-import Header from '../components/header';
-import Catalog from '../components/catalog';
+import Header from '@cmp/header';
 import '@style/global.less';
 // import Helmet from "react-helmet";
 
@@ -33,7 +32,6 @@ function Template({ data }) {
   return (
     <div className="page page-article-template">
       <Header />
-      <Catalog />
       <article
         className="border"
         dangerouslySetInnerHTML={{ __html: post.html }}

@@ -25,7 +25,8 @@ module.exports = {
       options: {
         alias: {
           "@": "src",
-          "@style": "src/style"
+          "@style": "src/style",
+          "@cmp": "src/components"
         },
         extensions: ["js", "tsx"]
       }

@@ -4,7 +4,7 @@ import './index.less';
 
 function Header(props){
   return(
-    <header className="g-header">
+    <header className="c-header">
       <Link to="/">首页</Link>
       <span>博客</span>
       <span>Github</span>

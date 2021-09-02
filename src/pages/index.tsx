@@ -1,18 +1,14 @@
 // 主页
 import React from "react";
-import { Link } from "gatsby";
-import Header from "../components/header";
+import { Link, graphql } from "gatsby";
+import Layout from "@cmp/layout";
 import { DateUtil } from '@/util';
 import '@style/global.less';
 
 const HomePage = ({ data }) => {
   let articles = data.allMarkdownRemark.nodes;
   articles = articles.sort((a, b) => DateUtil.sort(a.parent.mtime, b.parent.mtime, 'desc'));
-  return <div className='page page-home-wrap'>
-    <Header />
-    <main><br/>首<br/>页<br/>内<br/>容...</main>
-    <Link to="/other">Go to other</Link>
-    <h2>文章列表</h2>
+  return <Layout className='page page-home-wrap'>
     <ul className='link-wrap'>
       {articles.map(node => (
         <li key={node.id}>
@@ -23,7 +19,7 @@ const HomePage = ({ data }) => {
         </li>
       ))}
     </ul>
-  </div>
+  </Layout>
 };
 
 /**
