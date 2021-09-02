@@ -1,4 +1,5 @@
 import { graphql, useStaticQuery, Link } from 'gatsby';
+import { rawListeners } from 'process';
 import React from 'react';
 import './index.less';
 
@@ -42,26 +43,6 @@ function traverse(root, targetId) {
   return { end: false, node: null };
 }
 
-const NavItem = ({ node }) => {
-  if (node.type === NodeType.file) {
-    return (
-      <Link to={node.to} className="file-name">{node.name}</Link>
-    );
-  }
-  return (
-    <div className="file-item">
-      <div className="file-name">{node.name}</div>
-      {
-        <ul className="child-li">
-          {node.child.map(childNode => (
-            <NavItem node={childNode} key={childNode.id} />
-          ))}
-        </ul>
-      }
-    </div>
-  );
-};
-
 const queryDir = graphql`
   query AllDir {
     allMarkdownRemark {
@@ -81,6 +62,26 @@ const queryDir = graphql`
     }
   }
 `;
+
+const NavItem = ({ node }) => {
+  if (node.type === NodeType.file) {
+    return (
+      <Link to={node.to} className="file-name">{node.name}</Link>
+    );
+  }
+  return (
+    <div className="file-item">
+      <div className="file-name">{node.name}</div>
+      {
+        <ul className="child-li">
+          {node.child.map(childNode => (
+            <NavItem node={childNode} key={childNode.id} />
+          ))}
+        </ul>
+      }
+    </div>
+  );
+};
 
 const Nav = () => {
   const data = useStaticQuery(queryDir);
@@ -112,13 +113,24 @@ const Nav = () => {
       parentNode = result.node;
     });
   });
+  const childs = [...RootNode.child].sort(fileSort);
   return (
     <div className="c-nav">
-      {RootNode.child.map(node => (
+      {childs.map(node => (
         <NavItem node={node} key={node.id}></NavItem>
       ))}
     </div>
   );
 };
+
+function fileSort(a, b) {
+  if (a.type === b.type) {
+    return 0;
+  }
+  if (a.type === NodeType.dir) {
+    return -1;
+  }
+  return 1;
+}
 
 export default Nav;

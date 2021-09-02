@@ -1,12 +1,20 @@
 .c-nav {
   outline: 1px solid blue;
+  min-height: calc(100vh - 48px);
+  padding: 16px;
+  overflow: auto;
   .file-item {
-    a {
-      display: block;
-    }
+    display: block;
+    margin: 8px 0;
+    white-space: nowrap;
   }
   .file-name {
     color: blue;
     cursor: pointer;
+    display: block;
+  }
+  .child-li {
+    padding-left: 16px;
+    margin: 0;
   }
 }

@@ -1,7 +1,7 @@
 // MD文件模板
 import React from 'react';
-import { Link, graphql } from 'gatsby';
-import Header from '@cmp/header';
+import { graphql } from 'gatsby';
+import Layout from '@cmp/layout';
 import '@style/global.less';
 // import Helmet from "react-helmet";
 
@@ -30,14 +30,9 @@ export const postQuery = graphql`
 function Template({ data }) {
   const { markdownRemark: post } = data;
   return (
-    <div className="page page-article-template">
-      <Header />
-      <article
-        className="border"
-        dangerouslySetInnerHTML={{ __html: post.html }}
-      ></article>
-      <Link to="/">Home</Link>
-    </div>
+    <Layout className="page page-article-template">
+      <article dangerouslySetInnerHTML={{ __html: post.html }}></article>
+    </Layout>
   );
 }
 
