@@ -1,13 +1,14 @@
 import { graphql, useStaticQuery, Link } from 'gatsby';
-import { rawListeners } from 'process';
-import React from 'react';
+import React, { useState } from 'react';
 import './index.less';
 
 const NodeType = {
   dir: 'dir',
   file: 'file',
 };
-//
+
+// const urlObj = new URL(window.location.href);
+
 function createNode(info, parentNode?) {
   const node = {
     id: info.id,
@@ -63,19 +64,27 @@ const queryDir = graphql`
   }
 `;
 
-const NavItem = ({ node }) => {
+const NavItem = ({ node, urlPath }) => {
+  let initExpand = false;
+  if (window.sessionStorage.getItem(node.id) === '1' || new RegExp(node.id).test(urlPath)) {
+    initExpand = true;
+  }
+  const [expand, setExpand] = useState(initExpand);
+
+  const handleClick = () => {
+    setExpand(!expand);
+    window.sessionStorage.setItem(node.id, expand ? '0' : '1');
+  }
   if (node.type === NodeType.file) {
-    return (
-      <Link to={node.to} className="file-name">{node.name}</Link>
-    );
+    return <Link to={node.to} className="file-name">{node.name}</Link>;
   }
   return (
-    <div className="file-item">
-      <div className="file-name">{node.name}</div>
+    <div className={`file-item fold ${expand ? 'expand' : ''}`}>
+      <div onClick={handleClick} className="file-name">{node.name}</div>
       {
-        <ul className="child-li">
+        <ul className="child-list">
           {node.child.map(childNode => (
-            <NavItem node={childNode} key={childNode.id} />
+            <NavItem node={childNode} urlPath={urlPath} key={childNode.id} />
           ))}
         </ul>
       }
@@ -114,10 +123,12 @@ const Nav = () => {
     });
   });
   const childs = [...RootNode.child].sort(fileSort);
+  let urlPath = decodeURIComponent(window.location.pathname).replace(/\//g, '-')
+  urlPath = urlPath.replace(/^\-|\-$/g, '');
   return (
     <div className="c-nav">
       {childs.map(node => (
-        <NavItem node={node} key={node.id}></NavItem>
+        <NavItem node={node} urlPath={urlPath} key={node.id}></NavItem>
       ))}
     </div>
   );

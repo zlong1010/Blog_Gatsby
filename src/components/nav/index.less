@@ -7,14 +7,36 @@
     display: block;
     margin: 8px 0;
     white-space: nowrap;
+    &.fold {
+      > .file-name::before {
+        content: '';
+        display: inline-block;
+        width: 0;
+        height: 0;
+        margin-right: 8px;
+        border-style: solid;
+        border-width: 4px 0 4px 9px;
+        border-color: transparent transparent transparent blue;
+        animation: 0.5s linear;
+      }
+      &.expand {
+        > .file-name::before {
+          transform: rotate(90deg);
+        }
+        > .child-list {
+          display: block;
+        }
+      }
+    }
   }
   .file-name {
     color: blue;
     cursor: pointer;
     display: block;
   }
-  .child-li {
+  .child-list {
     padding-left: 16px;
     margin: 0;
+    display: none;
   }
 }
