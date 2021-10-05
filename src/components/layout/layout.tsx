@@ -6,12 +6,12 @@ import './index.less';
 
 const prefix = createCls('c-layout');
 
-const Layout = (props) => {
+const Layout = props => {
   return (
     <div className={`${prefix('wrap')} ${props.className}`}>
       <Header />
       <div className={prefix('sidebar-content')}>
-        <Nav />
+        <Nav>{props.nav}</Nav>
         <main className={prefix('content')}>{props.children}</main>
       </div>
     </div>

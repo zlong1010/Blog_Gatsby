@@ -92,7 +92,10 @@ const NavItem = ({ node, urlPath }) => {
   );
 };
 
-const Nav = () => {
+const Nav = props => {
+  if (props.children) {
+    return props.children;
+  }
   const data = useStaticQuery(queryDir);
   let dirList = [];
   const articleArr = data.allMarkdownRemark.nodes;
