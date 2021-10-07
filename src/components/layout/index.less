@@ -1,11 +1,15 @@
 .c-layout {
   &-sidebar-content {
-    display: flex;
+    position: relative;
     .c-nav {
-      flex: 0 0 200px;
+      width: 25%;
+      max-width: 300px;
+      position: fixed;
+      left: 0;
+      top: 48px;
     }
   }
   &-content {
-    margin-left: 32px;
+    margin-left: 30%;
   }
 }

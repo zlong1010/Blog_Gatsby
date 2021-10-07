@@ -17,7 +17,7 @@
         border-style: solid;
         border-width: 4px 0 4px 9px;
         border-color: transparent transparent transparent blue;
-        animation: 0.5s linear;
+        transition: all ease-out .2s;
       }
       &.expand {
         > .file-name::before {
@@ -38,5 +38,6 @@
     padding-left: 16px;
     margin: 0;
     display: none;
+    transition: all ease-out .2s;
   }
 }
