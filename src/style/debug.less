@@ -1,5 +1,17 @@
 @import './common.less';
 
+@keyframes silde {
+  0% {
+    background-color: green;
+  }
+  50% {
+    background-color: blue;
+  }
+  100% {
+    background-color: red;
+  }
+}
+
 .p-debug {
   outline: 1px solid red;
   width: 70vw;
@@ -7,55 +19,12 @@
   margin: 40px auto 0;
   overflow: auto;
   position: relative;
-  .float {
-    float: left;
-    width: 100px;
-    height: 100px;
-    background-color: blue;
-  }
-  .content {
-    outline: 1px solid green;
-    display: flow-root;
-    height: 100%;
-  }
-  .scale-wrap {
-    .container {
-      // width: 200px;
-      // height: 200px;
-      outline: 1px solid blue;
-    }
-    .content2 {
-      width: 200px;
-      height: 200px;
-      background-color: brown;
-      transform: scale(0.5);
-    }
-  }
-  // vertical
-  .vertical-wrap {
-    width: 300px;
-    height: 300px;
-    display: inline-block;
+  .animation {
+    width: 200px;
+    height: 200px;
     background-color: red;
-    div {
-      width: 100px;
-      height: 200px;
-      display: inline-block;
-      outline: 1px solid blue;
-    }
-  }
-  // 两端对齐
-  .align-wrap {
-    outline: 1px solid red;
-    width: 700px;
-    margin: 0 auto;
-    text-align: justify;
-    > span {
-      vertical-align: middle;
-      width: 200px;
-      height: 200px;
-      outline: 1px solid blue;
-      display: inline-block;
+    &.active {
+      animation: silde 10s infinite;
     }
   }
 }
