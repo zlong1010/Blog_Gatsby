@@ -1,14 +1,15 @@
-import * as DateUtil from "./date";
+export * as DateUtil from "./date";
 
-export { DateUtil };
+export const isBrowser = () => typeof window !== 'undefined';
+/**
+ * 生成带命名空间的 className 字符串
+ * 支持对象类型和不限数量的 modifier，例如：
+ * const cls = createCls('namespace')
+ * cls('className')
+ * cls('className', 'modifier1', 'modifier2')
+ * cls('className', {'modifier1': true, 'modifier2': false}, 'modifier3')
+ */
 
-
-// 生成带命名空间的 className 字符串
-// 支持对象类型和不限数量的 modifier，例如：
-// const cls = createCls('namespace')
-// cls('className')
-// cls('className', 'modifier1', 'modifier2')
-// cls('className', {'modifier1': true, 'modifier2': false}, 'modifier3')
 export const createCls = (namespace) => (
   className: string,
   ...modifiers: Array<string | number | object>

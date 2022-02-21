@@ -1,5 +1,6 @@
 import { graphql, useStaticQuery, Link } from 'gatsby';
 import React, { useState } from 'react';
+import { isBrowser } from '@/util';
 import './index.less';
 
 const NodeType = {
@@ -66,14 +67,14 @@ const queryDir = graphql`
 
 const NavItem = ({ node, urlPath }) => {
   let initExpand = false;
-  if (window.sessionStorage.getItem(node.id) === '1' || new RegExp(node.id).test(urlPath)) {
+  if (isBrowser() && window.sessionStorage.getItem(node.id) === '1' || new RegExp(node.id).test(urlPath)) {
     initExpand = true;
   }
   const [expand, setExpand] = useState(initExpand);
 
   const handleClick = () => {
     setExpand(!expand);
-    window.sessionStorage.setItem(node.id, expand ? '0' : '1');
+    isBrowser() && window.sessionStorage.setItem(node.id, expand ? '0' : '1');
   }
   if (node.type === NodeType.file) {
     return <Link to={node.to} className="file-name">{node.name}</Link>;
@@ -126,7 +127,8 @@ const Nav = props => {
     });
   });
   const childs = [...RootNode.child].sort(fileSort);
-  let urlPath = decodeURIComponent(window.location.pathname).replace(/\//g, '-')
+  const pathname = isBrowser() ? window?.location.pathname : '';
+  let urlPath = decodeURIComponent(pathname).replace(/\//g, '-')
   urlPath = urlPath.replace(/^\-|\-$/g, '');
   return (
     <div className="c-nav">
